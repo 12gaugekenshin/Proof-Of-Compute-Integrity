@@ -34,6 +34,7 @@ Inside the activated venv:
 
 pip install pynacl
 
+pip install cryptography
 
 This installs the Ed25519 crypto library.
 
