@@ -1,2 +1,3 @@
-# Proof-Of-Compute-Integrity
-Formalized Professional Repository of my work.
+# Proof-Of-Compute-Integrity Prototype
+
+You must use the README for this branch in order to run this prototype! 
