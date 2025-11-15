@@ -1,0 +1,351 @@
+This will be where my ASCII diagrams will be set until made into PNG's to be put in the paper.
+
+
+Diagram 1: Four loops
+
+                    +----------------------+
+                    |    AI Model / Agent  |
+                    +----------+-----------+
+                               |
+                               v
+                      +------------------+
+                      | Loop 1: Event    |
+                      |   Creation       |
+                      +---------+--------+
+                                |
+                                v
+                      +------------------+
+                      | Loop 2: Proof    |
+                      |  Generation      |
+                      | (hash + sign)    |
+                      +---------+--------+
+                                |
+                                v
+                  +-----------------------------+
+                  |  Loop 3: Kaspa Anchor       |
+                  |  (DAG inclusion + time)     |
+                  +---------+-------------------+
+                            |
+                            v
+        +------------------------------------------------+
+        |        Loop 4: Verification & Lineage Rebuild  |
+        |                                                |
+        |    +----------------------+     +------------+ |
+        |    |      Verifier        |<--->| Off-chain  | |
+        |    |  (rebuilds lineage)  |     | Storage    | |
+        |    +----------------------+     +------------+ |
+        +------------------------------------------------+
+
+
+
+
+Diagram 2: Proof Object Structure
+
++-----------------------------------------+
+|          Proof Object (JSON)            |
++-----------------------------------------+
+| event_id: UUID                          |
+| timestamp: unix                         |
+| model_id: ed25519 public key            |
+| hash: SHA-256(event_bytes)              |
+| signature: ed25519(hash)                |
+| optional_zk: <proof>                    |
++-----------------------------------------+
+
+Diagram 3: Kaspa Anchor Flow
+
+Proof ---> Kaspa RPC ---> Node ---> DAG Block ---> Finality Window
+
++--------+      RPC      +-----------+      +-----------+      +------------+
+| Proof  | ------------> | Kaspa Node| ---> | DAG Block | ---> | Finalized  |
+| Object |               | (submission)|     |  Inclusion|      | (~1 hour) |
++--------+               +-----------+      +-----------+      +------------+
+
+Diagram 4: Lineage Rebuild
+
+                +----------------------+
+                |      Verifier        |
+                +----------------------+
+                          |
+                          v
+               [Load stored proofs]
+                          |
+                          v
+               [Rebuild lineage graph]
+                          |
+                          +----> Reject if missing links
+                          |
+                          +----> Accept if continuity holds
+
+Diagram 5: On-Chain vs Off-Chain Boundary Diagram 
+
+                     +------------------------------+
+                     |        Kaspa Network         |
+                     +------------------------------+
+                     |  Stores ONLY:               |
+                     |    • Proof hash             |
+                     |    • Signature              |
+                     |    • Timestamp              |
+                     |    • Model ID               |
+                     +------------------------------+
+                               ^
+                               |
+                         (Anchor Tx)
+                               |
+                               v
++---------------------------------------------------------------+
+|                     Off-Chain Storage                         |
++---------------------------------------------------------------+
+| Stores:                                                       |
+|   • Model outputs                                             |
+|   • Feature maps / checkpoints                                |
+|   • Training logs (optional)                                  |
+|   • Metadata & lineage graphs                                 |
+|                                                               |
+| Accessed by:                                                  |
+|   • Verifier (Loop 4)                                         |
+|   • Adaptive Controller                                       |
++---------------------------------------------------------------+
+
+Diagram 6: Actor roles diagram
+
++-------------+        +---------------+         +----------------+
+|  AI Model   | -----> |  Proof Engine | ----->  |   Kaspa Node   |
++-------------+        +---------------+         +----------------+
+       |                       |                         |
+       |                       v                         |
+       |             +------------------+                |
+       |             | Off-chain Store  | <--------------+
+       |             +------------------+
+       |                       ^
+       |                       |
+       +-----------------------+
+               (Verifier)
+
+
+Diagram 7: Threat Model Map
+
++------------------------+---------------------------+-------------------------+
+|      Threat            |     Attack Description    |  Mitigated By (Loop)   |
++------------------------+---------------------------+-------------------------+
+| Ghost Compute          | AI claims computation     | Loop 2 (Proof)          |
+|                        | without running it        |                         |
++------------------------+---------------------------+-------------------------+
+| Backdated Proof        | Fake timestamp / reorder  | Loop 3 (Kaspa Anchor)   |
++------------------------+---------------------------+-------------------------+
+| Output Forgery         | Altered output after fact | Loop 4 (Lineage Rebuild)|
++------------------------+---------------------------+-------------------------+
+| Model Spoofing         | Fake model identity       | Loop 2 (Signature)      |
++------------------------+---------------------------+-------------------------+
+| Replay Attack          | Reusing old proof         | Loop 3 (Finality)       |
++------------------------+---------------------------+-------------------------+
+
+Diagram 8: Temporal Ordering Diagram
+
+Traditional Blockchain (Linear):
+    Block 1 → Block 2 → Block 3 → Block 4
+
+Kaspa DAG (Parallel + Ordered):
+     Block A
+     /    \
+ Block B  Block C
+     \    /
+      Block D
+        |
+      Finality (~1hr)
+
+Diagram 9: Example Lineage Tree
+
+Event A (root)
+   |
+   +--> Proof A1
+            |
+            v
+        Event B
+            |
+            +--> Proof B1
+                    |
+                    v
+                Event C
+                    |
+                    +--> Proof C1
+
+Diagram 10: Adaptive Controller Feedback Diagram 
+
+         +------------------------+
+         |    Verifier Output     |
+         | (pass / fail / weight) |
+         +------------------------+
+                     |
+                     v
+       +-----------------------------+
+       |  Adaptive Controller        |
+       |  - Updates trust weights    |
+       |  - Adjusts scrutiny level   |
+       |  - Re-tunes thresholds      |
+       +-----------------------------+
+                     |
+                     v
+             Feeds back into
+        +-----------------------+
+        |   Loop 1 (Event Gen) |
+        +-----------------------+
+
+Diagram 11: Honest VS Malicious Model Timeline
+
+HONEST MODEL:
+Event → Proof → Anchor → Lineage Rebuild → Pass
+
+MALICIOUS MODEL:
+Event → (No Valid Proof) → Anchor Missing → Rebuild Fails → Reject
+
+Diagram 12: System Pipeline Summary
+
+AI Model
+   |
+   v
+[Loop 1: Event]
+   |
+   v
+[Loop 2: Proof (hash+sig)]
+   |
+   v
+[Loop 3: Kaspa Anchor]
+   |
+   v
+Off-chain Storage <----> Verifier
+                 ^          |
+                 |          |
+                 +----------+
+                 (Loop 4: Lineage Rebuild)
+
+Diagram 13: Lineage Graph with Missing Proof
+
+A → B → C → D → E
+
+If C’s proof missing:
+A → B → [X] → D → E
+         ^--- break
+
+Verifier flags chain as invalid.
+
+Diagram 14: Proof Submission Sequence
+
+AI Model
+   |
+   v
+Proof Engine
+   |
+   v
+Kaspa RPC Client
+   |
+   v
+Kaspa Node
+   |
+   v
+Included in Block
+   |
+   v
+Merge Depth → Finality
+
+
+Diagram 15: Minimal Data Path Diagram
+
+Compute Event → Hash → Sign → Store off-chain  
+                            |
+                            v
+                          Kaspa
+                 (store hash + metadata only)
+
+Diagram 15: Conceptual Math Loop Diagram 
+
+                 +-----------------------------+
+                 |     Verifier Output         |
+                 |  (pass/fail, confidence)    |
+                 +-------------+---------------+
+                               |
+                               v
+                     +-------------------+
+                     |  Error Signal     |
+                     |  e_t = f(actual,  |
+                     |        expected)  |
+                     +---------+---------+
+                               |
+                               v
+                 +------------------------------+
+                 |   Adaptive Controller        |
+                 | (12g-ACE / 12g-AFL math)     |
+                 |                              |
+                 |  w_{t+1} = w_t - η * ∇L_t     |
+                 |  θ_{t+1} = g(θ_t, e_t)       |
+                 +--------------+---------------+
+                                |
+                                v
+            +-----------------------------------------+
+            | Updated Parameters Sent Back to Loop 1  |
+            | (changes event-generation behavior)     |
+            +-----------------------------------------+
+
+Diagram 16: Advanced Math System Diagram
+
+                          Verifier
+                (rebuilds lineage, checks proofs)
+                               |
+                               v
+                      +----------------+
+                      |  Consistency   |
+                      |  Score s_t     |
+                      +--------+-------+
+                               |
+                               v
+                      +----------------+
+                      |  Loss L_t      |
+                      | L_t = φ(1-s_t) |
+                      +--------+-------+
+                               |
+                               v
+                 +-----------------------------+
+                 |   Gradient Computation       |
+                 |   ∇L_t = ∂L/∂θ_t             |
+                 +--------+--------------------+
+                          |
+                          v
+                +--------------------------------+
+                |  12g-ACE (Adaptive Coherence)  |
+                |  θ_{t+1} = θ_t - η * ∇L_t       |
+                +--------------------------------+
+                          |
+                          v
+                +--------------------------------+
+                |  12g-AFL (Adaptive Feedback     |
+                |   Lineage weighting)            |
+                |  w_{t+1} = λ w_t + (1-λ)s_t     |
+                +--------------------------------+
+                          |
+                          v
+            +-------------------------------------------+
+            | Updated Control Parameters Sent to Loop 1 |
+            |  - θ influences event generation           |
+            |  - w influences proof strictness           |
+            +-------------------------------------------+
+
+Diagram 17: Super Compact Math Cycle Diagram
+
+s_t → L_t → ∇L_t → θ_{t+1}
+  ↘
+    → w_{t+1}
+
+
+
+s_t  ------→  L_t  ------→  ∇L_t  ------→  θ_{t+1}
+  \                                           |
+   \------→  w_{t+1}  -------------------------+
+                  \                            |
+                   \----------------------------→ (feeds Loop 4)
+
+
+
+
+
+
+
