@@ -1,0 +1,9 @@
+This repository uses a dual-license structure:
+
+• Code: Licensed under Apache 2.0 (LICENSE)
+This applies to all Python modules, scripts, and implementation code.
+
+• Documentation & Research: Licensed under Creative Commons Attribution 4.0 (CC BY 4.0) (LICENSE_DOCS)
+This applies to the PoCI whitepaper, diagrams, explanations, and research materials.
+
+You are free to use, modify, and build on this work as long as proper attribution is provided.
