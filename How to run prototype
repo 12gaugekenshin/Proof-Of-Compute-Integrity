@@ -1,0 +1,92 @@
+# Proof-of-Compute-Integrity — Baseline Simulation
+This repository contains a minimal, working demonstration of a **cryptographic compute-integrity controller**, using real Ed25519 signatures and an adaptive trust/penalty system.  
+It is a simple and reproducible proof-of-concept meant for local testing.
+
+---
+
+##  1. Requirements
+
+- Python 3.10+
+- `pynacl` library (installed through pip)
+- Windows, macOS, or Linux
+
+---
+
+##  2. Create a Virtual Environment (recommended)
+
+Open **PowerShell** or **Terminal** inside the project folder, then run:
+
+### Windows (PowerShell):
+```powershell
+python -m venv .venv
+. .venv\Scripts\Activate.ps1
+
+macOS / Linux:
+python3 -m venv .venv
+source .venv/bin/activate
+
+
+3. Install Dependencies
+
+Inside the activated venv:
+
+pip install pynacl
+
+
+This installs the Ed25519 crypto library.
+
+
+4. Run the Simulation
+
+Simply execute:
+
+python run_demo.py
+
+
+You will see output showing:
+
+Event lineage steps
+
+Signature verification
+
+Honest/BAD events
+
+Controller trust weights
+
+Adaptive penalties (θ)
+
+Attack response behavior
+
+Example:
+
+[BOOTSTRAP] idx=000 | honest_core | GOOD | w=1.00, θ=0.92
+[ATTACK   ] idx=007 | attacker    | BAD  | w=0.83, θ=1.04
+
+
+5. Project Structure
+crypto_utils.py     # Key generation + signing + verification
+models.py           # Honest + attacker model definitions
+controller.py       # Trust weights + adaptive penalty (theta)
+lineage.py          # Event creation + sequential proofs
+run_demo.py         # Example simulation runner
+
+
+***This structure is meant to be easy to extend with:
+
+more attack patterns
+
+more models
+
+on-chain anchoring
+
+multi-model environments
+
+********6. Notes
+
+This is a simplified demonstration, not the full PoCI protocol.
+
+All cryptography is real (Ed25519, NaCl).
+
+The trust system is deterministic and reproducible.
+
+No external services or APIs are needed.
