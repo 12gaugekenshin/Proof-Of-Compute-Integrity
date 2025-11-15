@@ -1,0 +1,71 @@
+Proof of Compute Integrity: Anchoring Intelligence to Reality
+In the age of artificial intelligence, trust has become abstract. Models create, adapt, and evolve faster than we can verify them. We’re told to “trust the process,” yet the process itself has no proof.
+It’s time for that to change.
+Kaspa, with its foundation in Proof-of-Work and its parallel DAG architecture, gives us something no other network can: a way to anchor intelligence to physics – to prove that a computation really happened, when it happened, and by whom – without exposing what was computed.
+That’s the basis of Proof-of-Compute-Integrity, or PoCI – a system where AI work becomes
+verifiable, not through central oversight, but through immutable, decentralized evidence.
+
+How It Works
+When an AI model performs work – training, inference, or analysis – it produces a cryptographic proof: a small, signed hash describing the who, when, and how of the computation. No data is revealed. No privacy is lost. Only the fingerprint of honesty remains. That proof is then anchored into Kaspa’s DAG, where every entry inherits the network’s unique combination of:
+• Proof-of-Work energy cost (physical trust)
+• Temporal ordering (causal truth)
+• Merge-depth finality (immutability after confirmation)
+Once recorded, that event becomes part of a public lineage – a trail of verified compute, traceable and permanent.
+
+Verifiable, Not Exposed
+To protect proprietary work, the actual AI data and model outputs remain off-chain – stored privately or in distributed storage systems like IPFS. Kaspa holds only their cryptographic commitments, making verification possible without access to the raw material. Through vProgs – Kaspa’s verifiable programs – those proofs are automatically checked and rewarded. Each valid proof triggers a micro-payment in KAS, drawn from a shared verification pool.
+That pool is funded not by speculation, but by the very AI companies who depend on public trust. They contribute small amounts of KAS to sustain the integrity infrastructure that keeps their proofs verifiable forever. No tokens. No inflation. No profit motive – just enough reward to keep the network honest.
+
+Why It Matters
+In a world of deepfakes, synthetic data, and black-box systems, verifiable lineage becomes more than a feature – it becomes the foundation of truth. PoCI turns honesty into a measurable resource. It ensures that claims of “AI transparency” aren’t empty slogans but cryptographically provable facts, sealed in Kaspa’s ledger by the same physical law that secures its currency.
+
+The Vision
+Proof-of-Compute-Integrity isn’t about ownership – it’s about witness. It’s a framework where computation can testify to itself, where intelligence has a lineage, and where truth, once proven, cannot be undone. Kaspa provides the ground. AI provides the growth. Together, they create a living record of integrity – a decentralized archive of verified thought and work, anchored not in authority, but in reality itself. Kaspa doesn’t just store data. It stores proof that something real happened. And that’s how we bring honesty back to intelligence.
+
+The Intelligence of Integrity
+For integrity to endure, it can’t remain static – it has to learn. Every act of verification, every proof recorded in Kaspa’s ledger, feeds back into a living process – a system that refines its sense of truth through experience.
+
+This is the foundation of PoCI’s Adaptive Feedback Framework: a structure that allows the network itself to evolve, to recognize patterns of honesty, and to correct deviations over time. It’s built around four continuous loops – the cycle through which truth becomes self-aware:
+1. Observation – When a model performs work, it leaves a cryptographic trace – the
+network’s first glimpse of reality.
+2. Evaluation – That proof is checked against expectations and past behavior, tested by
+verifiers and vProgs for consistency.
+3. Correction – The network adjusts its internal trust weights, learning which participants
+uphold integrity and which drift from it.
+4. Integration – The verified result is sealed into Kaspa’s DAG – a permanent record that
+becomes the foundation for the next cycle.
+Each round completes a circuit: observation, reflection, adaptation, integration – again and again. Through these loops, the network develops memory, rhythm, and resilience. It becomes a learning organism of proof.
+
+The Adaptive Controller
+At the core of this feedback lies a simple but powerful rule – the Adaptive Controller Equation:
+A(t+1) = A(t) + α · (F(E) – A(t))
+Here, A(t) represents an actor’s current integrity score, F(E) measures the verified honesty of their latest computation, and α defines the learning rate – how quickly the network evolves. When a proof is verified, the system shifts trust slightly toward that result; when it fails, trust recedes. Over thousands of cycles, the network finds balance – not by decree, but by mathematical convergence. It’s the same principle that guides adaptive control systems and neural learning – now applied to honesty itself. Trust becomes a dynamic variable, shaped by real evidence rather than assumption.
+
+A Living Ledger
+Together, the feedback framework and controller equation give PoCI its soul. The ledger doesn’t just record truth – it responds to it. Each event teaches the system how to interpret the next. Integrity stops being a static property and becomes a behavior – one that strengthens every time it’s proven. Kaspa’s DAG gives that behavior a body in the physical world – energy, time, and irreversible sequence. The feedback loops give it thought – a way to adjust and improve. That’s how Proof-of-Compute-Integrity anchors intelligence to reality – through a network that learns to preserve what is real, one verified cycle at a time
+
+12GaugeKenshin – learning systems, proving truth.
+
+(Related Work:
+[1] Goldwasser et al., “Verifiable Computation,” 2010.
+
+[2] Jia et al., “Proof-of-Learning: Definitions and Practice,” 2021.
+
+[3] Bittensor Whitepaper, 2022.
+
+[4] Kamvar et al., “The EigenTrust Algorithm for Reputation Management,” 2003.
+
+Prior efforts in verifiable computation [1] and Proof-of-Learning frameworks [2] explore ways to validate outsourced or machine-learning work, while blockchain-based AI projects such as Bittensor [3] focus on tokenized market incentives for model scoring.
+Reputation protocols like EigenTrust [4] demonstrate global trust propagation in peer-to-peer networks but rely on subjective or stake-weighted feedback.
+None of these systems anchor computational integrity directly to a Proof-of-Work DAG or apply an adaptive feedback-controller to manage honesty as a learned behavior.
+
+To the best of our knowledge, no prior framework combines PoW-DAG anchoring on Kaspa, a privacy-preserving compute-provenance layer, and an adaptive feedback-controller for uploader trust, sustained by a minimal, sponsor-funded KAS pool rather than tokenized incentives.)
+
+(System Attribution
+The 12Gauge Adaptive Controller Equation (12G-ACE) and 12Gauge Adaptive Feedback Loop (12G-AFL) form the operational foundation of Proof-of-Compute-Integrity.
+Inspired by principles of adaptive control theory
+– including Kalman filters and PID controllers
+– these mechanisms reinterpret classical feedback stability within a decentralized, cryptographic framework for proof integrity.
+Developed by 12GaugeKenshin, they define how integrity itself can adapt, learn, and sustain within Kaspa’s Proof-of-Work DAG.)
+
+Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
