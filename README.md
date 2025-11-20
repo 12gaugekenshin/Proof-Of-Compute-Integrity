@@ -1,5 +1,1 @@
-# **Simple ASCCII diagrams in the text above.**
-
-I will covert them to PNG diagrams eventually.
-
-Not my scope.
+Simple UI as of now. Mess around with it. Put all py files into folder, and run py poci_launcher.py 
